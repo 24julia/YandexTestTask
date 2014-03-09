@@ -15,7 +15,7 @@ for line in f:
         if match:
             print('    in the beginning was... ' + str(match.group(1)))
         else:
-            print('    Site isn\'t recognized.')
+            print('    Site isn\'t recognized.  ')
     else:
         print('    Nothing to show')
     i += 1
