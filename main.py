@@ -15,7 +15,7 @@ for line in f:
     a = json.loads(line)
     print(str(i+1)+': get line of ' + str(len(a)) + ' elements.', file=log)
     if len(a) > 0:
-        print("    1st element is: timestamp = " + str(a[0]['ts']) + '; address = ' + a[0]['url'], file=log)
+        print("    1-st element is: timestamp = " + str(a[0]['ts']) + '; address = ' + a[0]['url'], file=log)
         match = re.match(r".*(yandex|google)\.com\.tr.*", a[0]['url'])
         if match:
             print('    in the beginning was... ' + str(match.group(1)), file=log)
