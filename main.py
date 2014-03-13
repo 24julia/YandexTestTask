@@ -32,7 +32,7 @@ for line in f:
                     count_google[i] += 1
             j +=1
         print('Yandex: '+str(100*count_yandex[i]/len(a))+'%  Google: '+ str(100*count_google[i]/len(a))+'% All: ' + str(100*(count_yandex[i]+count_google[i])/len(a))+'%', file=log)
-        if (count_yandex[i]!=len(a) and count_google[i]!=len(a)):
+        if (count_google[i]!=len(a)):
             print(a, file=f1)
     else:
         print("    Nothing to show", file=log)
