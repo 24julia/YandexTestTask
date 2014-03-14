@@ -34,7 +34,8 @@ for line in f:
         print('Yandex: '+str(100*count_yandex[i]/len(a))+
               '%  Google: '+ str(100*count_google[i]/len(a))+
               '% All: ' + str(100*(count_yandex[i]+count_google[i])/len(a))+'%', file=log)
-        print(json.dumps(a), file=f1)
+        if len(a) > 5:
+            print(json.dumps(a), file=f1)
     else:
         print("    Nothing to show", file=log)
     i += 1
