@@ -54,7 +54,7 @@ for line in f:
         k = 0
         for x in j_for_deleting:
             del a[x-k]
-            k +=1
+            k += 1
         if len(a) > 5:
             print(json.dumps(a), file=f1)
     else:
