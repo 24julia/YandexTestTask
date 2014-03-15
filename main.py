@@ -27,25 +27,30 @@ for line in f:
         j = 0
         j_for_deleting = []
         for a_i in a:
-            match = re.match(r"^(\w+://)?[^/]*(yandex|google)\.com\.tr.*", a_i['url'])
-            if match:
-                a[j]['url'] = str(match.group(2))
-                if str(match.group(2)) == 'yandex':
-                    count_yandex[i] += 1
-                else:
-                    count_google[i] += 1
-            else:
+            match2 = re.match(r"^(\w+://)?[^/]*(yandex|google)\.com\.tr/(url\?|clck/).*$", a_i['url'])
+            if match2:
                 j_for_deleting.append(j)
-                print(str(j)+":  Nothing matched in: " + a_i['url'], file=log)
-                inner_match = re.match(r"^(\w+://)?([^/]+)/.*(yandex|google).*", a_i['url'])
-                if inner_match:
-                    print("    User redirected to " + str(inner_match.group(3)) + " from " + str(inner_match.group(2)), file=log)
-                    a[j]['url'] = str(inner_match.group(2))
-                    a[j]['url'] = "    Shit happens"
+                #print(str(j)+":  Search_results: " + a_i['url'], file=log)
+                a[j]['url'] = str(match2.group(2))+"_search_results"
+            else:
+                match = re.match(r"^(\w+://)?[^/]*(yandex|google)\.com\.tr/.*?$", a_i['url'])
+                if match:
+                    #print(str(j)+":  Work_in: " + a_i['url'], file=log)
+                    a[j]['url'] = str(match.group(2))
+                    if str(match.group(2)) == 'yandex':
+                        count_yandex[i] += 1
+                    else:
+                        count_google[i] += 1
                 else:
-                    print("    Shit happens", file=log)
-                    a[j]['url'] = "    Shit happens"
-
+                    j_for_deleting.append(j)
+                    print(str(j)+":  Nothing matched in: " + a_i['url'], file=log)
+                    inner_match = re.match(r"^(\w+://)?([^/]+)/.*(yandex|google).*", a_i['url'])
+                    if inner_match:
+                        #print("    User redirected to " + str(inner_match.group(3)) + " from " + str(inner_match.group(2)), file=log)
+                        a[j]['url'] = str(inner_match.group(2))
+                    else:
+                        print("    Shit happens", file=log)
+                        a[j]['url'] = "    Shit happens"
             j +=1
         print('Yandex: '+str(100*count_yandex[i]/len(a))+
               '%  Google: '+ str(100*count_google[i]/len(a))+
