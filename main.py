@@ -26,12 +26,13 @@ for line in f:
             print('    Site isn\'t recognized.  ', file=log)
         j = 0
         j_for_deleting = []
+        #analysis of each dictionary
         for a_i in a:
-            match2 = re.match(r"^(\w+://)?[^/]*(yandex|google)\.com\.tr/(url\?|clck/).*$", a_i['url'])
+            match2 = re.match(r"^(\w+://)?[^/]*(yandex|google)\.com\.tr/((url\?|clck/).*|installcounter.gs.html)?$", a_i['url'])
             if match2:
                 j_for_deleting.append(j)
-                #print(str(j)+":  Search_results: " + a_i['url'], file=log)
-                a[j]['url'] = str(match2.group(2))+"_search_results"
+                print(str(j)+":  Search results and start pages: " + a_i['url'], file=log)
+                a[j]['url'] = str(match2.group(2))+"_search_results_or_start_page"
             else:
                 match = re.match(r"^(\w+://)?[^/]*(yandex|google)\.com\.tr/.*?$", a_i['url'])
                 if match:
@@ -43,7 +44,7 @@ for line in f:
                         count_google[i] += 1
                 else:
                     j_for_deleting.append(j)
-                    print(str(j)+":  Nothing matched in: " + a_i['url'], file=log)
+                    #print(str(j)+":  Nothing matched in: " + a_i['url'], file=log)
                     inner_match = re.match(r"^(\w+://)?([^/]+)/.*(yandex|google).*", a_i['url'])
                     if inner_match:
                         #print("    User redirected to " + str(inner_match.group(3)) + " from " + str(inner_match.group(2)), file=log)
