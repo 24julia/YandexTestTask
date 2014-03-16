@@ -28,7 +28,7 @@ for line in f:
         j_for_deleting = []
         #analysis of each dictionary
         for a_i in a:
-            match2 = re.match(r"^((\w+://)?[^/]*(yandex|google)\.com\.tr/((url\?|clck/).*|installcounter\.[^.]\.html)?|((\w+://)?[^/]*(yandex\.com\.tr/(\?clid=|.*goo?g?gll?e?.*))|google\.com\.tr/.*yandex.*))$", a_i['url'])
+            match2 = re.match(r"^((\w+://)?[^/]*(yandex|google)\.com\.tr/((url\?|clck/).*|installcounter\..?.?.?\.html)?|((\w+://)?[^/]*(yandex\.com\.tr/(\?clid=|.*goo?g?gll?e?.*))|google\.com\.tr/.*yandex.*))$", a_i['url'])
             if match2:
                 j_for_deleting.append(j)
                 print(str(j)+":  Search results and start pages: " + a_i['url'], file=log)
