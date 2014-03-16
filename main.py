@@ -52,10 +52,28 @@ for line in f:
     if count_percent[i] == 0:
         google_all +=1
     i += 1
-data = [x for x in count_percent if (x < 95 and x > 5)]
+data = [x for x in count_percent]
 print(yandex_all)
 print(google_all)
-plt.hist(data, 200)
+plt.hist(data, 40)
 plt.xlabel(u"Процент использования Яндекса", family="verdana")
 plt.ylabel(u"Количество пользователей", family="verdana")
 plt.show()
+
+sum_yandex = 0
+sum_google = 0
+i = 0
+j_yandex_ = 0
+j_google_ = 0
+for x in count_yandex:
+    sum_yandex += count_percent[i]/100
+    sum_google += (100-count_percent[i])/100
+    if count_percent[i] == 0:
+        j_yandex_ += 1
+    if count_percent[i] == 100:
+        j_google_ += 1
+    i += 1
+sum_yandex /= i - j_yandex_
+sum_google /= i - j_google_
+
+print('Yandex   '+str(sum_yandex)+' Google  '+str(sum_google))
